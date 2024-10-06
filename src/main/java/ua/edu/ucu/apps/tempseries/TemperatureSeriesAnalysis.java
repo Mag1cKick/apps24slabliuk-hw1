@@ -17,7 +17,7 @@ public class TemperatureSeriesAnalysis {
         this.temperatureSeries = temperatureSeries;
     }
 
-    public double sum(){
+    public double sum() {
         double res = 0;
         for (int i = 0; i < temperatureSeries.length; i++)
         {
@@ -37,13 +37,13 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException("No pizza here");
         }
         double mean = average();
-        double res_sum = 0;
+        double ressum = 0;
 
         for (int i = 0; i < temperatureSeries.length; i++) {
             double dif = temperatureSeries[i] - mean;
-            res_sum += dif * dif;
+            ressum += dif * dif;
         }
-        return Math.sqrt(res_sum/temperatureSeries.length);
+        return Math.sqrt(ressum/temperatureSeries.length);
     }
 
     public double min() {
@@ -51,8 +51,8 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException("No pizza here");
         }
         double res = temperatureSeries[0];
-        for (int i = 0; i < temperatureSeries.length; i++){
-            if (res > temperatureSeries[i]){
+        for (int i = 0; i < temperatureSeries.length; i++) {
+            if (res > temperatureSeries[i]) {
                 res = temperatureSeries[i];
             }
         }
@@ -64,8 +64,8 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException("No pizza here");
         }
         double res = temperatureSeries[0];
-        for (int i = 0; i < temperatureSeries.length; i++){
-            if (res < temperatureSeries[i]){
+        for (int i = 0; i < temperatureSeries.length; i++) {
+            if (res < temperatureSeries[i]) {
                 res = temperatureSeries[i];
             }
         }
@@ -77,11 +77,11 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException("No pizza here");
         }
         double res = temperatureSeries[0];
-        for (int i = 0; i < temperatureSeries.length; i++){
-            if (Math.abs(res) == Math.abs(temperatureSeries[i])){
+        for (int i = 0; i < temperatureSeries.length; i++) {
+            if (Math.abs(res) == Math.abs(temperatureSeries[i])) {
                 res = Math.abs(res);
             }
-            if (Math.abs(res) > Math.abs(temperatureSeries[i])){
+            if (Math.abs(res) > Math.abs(temperatureSeries[i])) {
                 res = temperatureSeries[i];
             }
         }
@@ -93,11 +93,13 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException("No pizza here");
         }
         double res = temperatureSeries[0];
-        for (int i = 0; i < temperatureSeries.length; i++){
-            if (Math.abs(res - tempValue) == Math.abs(temperatureSeries[i] - tempValue)){
+        for (int i = 0; i < temperatureSeries.length; i++) {
+            if (Math.abs(res - tempValue) == Math.abs(temperatureSeries[i] -
+            tempValue)) {
                 res = Math.abs(res);
             }
-            if (Math.abs(res - tempValue) > Math.abs(temperatureSeries[i] - tempValue)){
+            if (Math.abs(res - tempValue) > Math.abs(temperatureSeries[i] -
+            tempValue)) {
                 res = temperatureSeries[i];
             }
         }
@@ -152,16 +154,16 @@ public class TemperatureSeriesAnalysis {
         }
         int count = 0;
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] > lowerBound &&
-            temperatureSeries[i] < upperBound) {
+            if (temperatureSeries[i] > lowerBound
+            && temperatureSeries[i] < upperBound) {
                 count++;
             }
         }
         double[] res = new double[count];
         count = 0;
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (temperatureSeries[i] > lowerBound &&
-            temperatureSeries[i] < upperBound) {
+            if (temperatureSeries[i] > lowerBound
+            && temperatureSeries[i] < upperBound) {
                 res[count] = temperatureSeries[i];
                 count++;
             }
@@ -178,8 +180,8 @@ public class TemperatureSeriesAnalysis {
         boolean a = true;
         while (a){
             a = false;
-            for (int i = 0; i < temperatureSeries.length - 1; i++){
-                if (temperatureSeries[i] > temperatureSeries[i+1]){
+            for (int i = 0; i < temperatureSeries.length - 1; i++) {
+                if (temperatureSeries[i] > temperatureSeries[i+1]) {
                     double save = temperatureSeries[i];
                     temperatureSeries[i] = temperatureSeries[i+1];
                     temperatureSeries[i+1] = save;
@@ -195,7 +197,8 @@ public class TemperatureSeriesAnalysis {
         if (temperatureSeries.length == 0) {
             throw new IllegalArgumentException("No pizza here");
         }
-        return new TempSummaryStatistics(this.average(), this.deviation(), this.min(), this.max());
+        return new TempSummaryStatistics(this.average(),
+         this.deviation(), this.min(), this.max());
     }
 
     public int addTemps(double... temps) {
@@ -204,18 +207,22 @@ public class TemperatureSeriesAnalysis {
         }
 
         int len = temperatureSeries.length;
-
+        int low = -273;
         for (int i = 0; i < temps.length; i++) {
-            if (temps[i] < -273) {
+            if (temps[i] < low) {
                 throw new InputMismatchException("Pizza is too cold");
             }
         }
 
-        if (temperatureSeries.length + temps.length > temperatureSeries.length) {
-            double[] newTemperatureSeries = new double[Math.max(temperatureSeries.length * 2, temperatureSeries.length + temps.length)];
-            for (int i = 0; i < temperatureSeries.length; i++){
+        if (temperatureSeries.length +
+        temps.length > temperatureSeries.length) {
+            double[] newTemperatureSeries = new double[Math.max(
+                temperatureSeries.length * 2,
+            temperatureSeries.length + temps.length)];
+            for (int i = 0; i < temperatureSeries.length; i++) {
                 newTemperatureSeries[i] = temperatureSeries[i];
             };
+    
             temperatureSeries = newTemperatureSeries;
         }
 
