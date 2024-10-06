@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter @Getter
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
+    private static final int ABSOLUTE_ZERO = -273;
 
     public TemperatureSeriesAnalysis() {
         this.temperatureSeries = new double[1];
@@ -94,12 +95,12 @@ public class TemperatureSeriesAnalysis {
         }
         double res = temperatureSeries[0];
         for (int i = 0; i < temperatureSeries.length; i++) {
-            if (Math.abs(res - tempValue) == Math.abs(temperatureSeries[i] -
-            tempValue)) {
+            if (Math.abs(res - tempValue) == Math.abs(temperatureSeries[i]
+            - tempValue)) {
                 res = Math.abs(res);
             }
-            if (Math.abs(res - tempValue) > Math.abs(temperatureSeries[i] -
-            tempValue)) {
+            if (Math.abs(res - tempValue) > Math.abs(temperatureSeries[i]
+            - tempValue)) {
                 res = temperatureSeries[i];
             }
         }
@@ -178,7 +179,7 @@ public class TemperatureSeriesAnalysis {
 
     public double[] sortTemps() {
         boolean a = true;
-        while (a){
+        while (a) {
             a = false;
             for (int i = 0; i < temperatureSeries.length - 1; i++) {
                 if (temperatureSeries[i] > temperatureSeries[i+1]) {
@@ -207,21 +208,20 @@ public class TemperatureSeriesAnalysis {
         }
 
         int len = temperatureSeries.length;
-        int low = -273;
         for (int i = 0; i < temps.length; i++) {
-            if (temps[i] < low) {
+            if (temps[i] < ABSOLUTE_ZERO) {
                 throw new InputMismatchException("Pizza is too cold");
             }
         }
 
-        if (temperatureSeries.length +
-        temps.length > temperatureSeries.length) {
+        if (temperatureSeries.length
+        + temps.length > temperatureSeries.length) {
             double[] newTemperatureSeries = new double[Math.max(
                 temperatureSeries.length * 2,
             temperatureSeries.length + temps.length)];
             for (int i = 0; i < temperatureSeries.length; i++) {
                 newTemperatureSeries[i] = temperatureSeries[i];
-            };
+            }
     
             temperatureSeries = newTemperatureSeries;
         }
