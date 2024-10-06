@@ -7,8 +7,9 @@ import lombok.Setter;
 
 @Setter @Getter
 public class TemperatureSeriesAnalysis {
-    private double[] temperatureSeries;
     private static final int ABSOLUTE_ZERO = -273;
+    private double[] temperatureSeries;
+
 
     public TemperatureSeriesAnalysis() {
         this.temperatureSeries = new double[1];
