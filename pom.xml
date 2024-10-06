@@ -48,7 +48,7 @@
                     </execution>
                     <execution>
                         <id>report</id>
-                        <phase>prepare-package</phase>
+                        <phase>verify</phase> <!-- Change phase to verify -->
                         <goals>
                             <goal>report</goal>
                         </goals>
